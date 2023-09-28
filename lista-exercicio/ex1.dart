@@ -1,10 +1,12 @@
+/*A percentagem de pessoas que responderam bom entre todos os expectadores analisados não está funcionando corretamente. Motivo em investigação*/
 import 'dart:io';
 void main(){
    var expectador = 0;
    var totalIdadeExcelente = 0;
    var quantidadeExcelente = 0;
    var quantidadeRegular = 0; 
-   while(expectador <= 20){
+   var quantidadeBom = 0; 
+   while(expectador <= 20){ //alterar para 20
     print("Pesquisa de satisfação da Cinépolis para o filme  “Senhor dos Anéis”");
     print("Para iniciar, por favor, digite a sua idade: ");
     String? idadeEntrada = stdin.readLineSync();
@@ -26,35 +28,36 @@ void main(){
         print("Ninguém respondeu 'Regular'.");
       }
     }
-    }
-
-    //Parei aqui: em refatorar o código. O adaptando p/ estrutura switch case.
-
-    //----------------------------------------------------------------
-    if (input == '3') { // Verifica se a opinião é "Excelente"
-        totalIdadeExcelente += idade; // Adiciona a idade à soma das idades Excelentes
-        quantidadeExcelente++; // Incrementa a quantidade de respostas Excelentes
-      } else if (input == '1') { // Adiciona esta parte para verificar se a opinião é "Regular"
-        quantidadeRegular++; // Incrementa a quantidade de respostas "Regular"
+    break;
+    case "2": // Não está funcionando corretamente. Motivo ainda em investigação
+    print("Sua escolha é $input");
+    if (input != null) {
+      quantidadeBom ++;
+      if (quantidadeBom > 0) { 
+        var porcentBom = ((quantidadeBom / expectador) * 100);
+        print(porcentBom);
+        print("Porcentagem de pessoas que responderam 'Bom': ${porcentBom.toStringAsFixed(2)}%");
+        } else {
+           print("Ninguém respondeu 'Bom'.");
+        }
       }
-
-    expectador++;
-    
-  }
-}
-
- if (quantidadeExcelente > 0) {
-    double mediaIdadeExcelente = totalIdadeExcelente / quantidadeExcelente;
-    print("Média das idades das pessoas que responderam 'Excelente': $mediaIdadeExcelente anos.");
+      break;
+      case "3":
+      print("Sua escolha é $input");
+      if (input != null){
+        quantidadeExcelente++;
+        if (quantidadeExcelente > 0){
+         totalIdadeExcelente += idade; // Adiciona a idade à soma das idades Excelentes 
+         double mediaIdadeExcelente = totalIdadeExcelente / quantidadeExcelente;
+         print("Média das idades das pessoas que responderam 'Excelente': $mediaIdadeExcelente anos.");
   } else {
     print("Ninguém respondeu 'Excelente'.");
   }
+        }
+        break;
+      }
+    }
+    ++ expectador;
+  }
 
-}
-
-
-
-/*print("Resultado da pesquisa");
-    if (input == "3") {
-      int media = (idadeEntrada == "3") ? "1" : "2"; media
-   }*/
+  }
